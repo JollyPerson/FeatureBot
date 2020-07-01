@@ -1,7 +1,5 @@
 package me.jollyperson.featurebot.configuration;
 
-import com.google.gson.Gson;
-
 public class Settings {
 
     private String token;
@@ -31,7 +29,7 @@ public class Settings {
         return streamingLink;
     }
 
-    public Settings(SettingsBuilder builder){
+    public Settings(SettingsManager builder){
 
     }
 }

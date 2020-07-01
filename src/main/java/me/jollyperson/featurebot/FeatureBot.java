@@ -1,7 +1,7 @@
 package me.jollyperson.featurebot;
 
 import me.jollyperson.featurebot.configuration.Settings;
-import me.jollyperson.featurebot.configuration.SettingsBuilder;
+import me.jollyperson.featurebot.configuration.SettingsManager;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -11,11 +11,11 @@ public class FeatureBot {
 
 
     private FeatureBot(){
-        SettingsBuilder settingsBuilder = new SettingsBuilder();
+        SettingsManager settingsBuilder = new SettingsManager();
         settings = settingsBuilder.build();
-        JDABuilder builder = new JDABuilder();
+        /*JDABuilder builder = new JDABuilder();
         builder.setActivity(Activity.of(Activity.ActivityType.valueOf(settings.getActivityType()), settings.getActivity()));
-        builder.setToken(settings.getToken());
+        builder.setToken(settings.getToken()); */
 
     }
 
