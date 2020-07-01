@@ -2,18 +2,27 @@ package me.jollyperson.featurebot.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SettingsManager {
 
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private String token;
-    private String activity;
-    private boolean streaming;
-    private String streamingLink;
+    final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    String token = "tokenNotSet";
+    String activity = "activityNotSet";
+    Activity.ActivityType activityType = Activity.ActivityType.DEFAULT;
+    boolean streaming = false;
+    String streamingLink = "no link provided";
+    private Settings settings;
 
 
     public SettingsManager setToken(String token) {
@@ -42,7 +51,11 @@ public class SettingsManager {
 
     private void loadJson() {
         try{
-            getSettingsFromResources();
+            File file = getSettingsFromResources();
+            Stream<String> lines = Files.lines(Path.of(file.getPath()));
+            String data = lines.collect(Collectors.joining("\n"));
+            lines.close();
+            settings = gson.fromJson(data, Settings.class);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -55,7 +68,7 @@ public class SettingsManager {
 
 
     public Settings build() {
-        return new Settings(this);
+        return settings;
     }
 
 
@@ -63,11 +76,10 @@ public class SettingsManager {
         File settingsFile = new File("settings.json");
         if(!settingsFile.exists()){
             settingsFile.createNewFile();
-
             System.out.println(settingsFile.getAbsoluteFile());
             FileOutputStream outputStream = new FileOutputStream(settingsFile);
-            Settings settings = new Settings(new SettingsManager().setActivity("CSGO").setStreaming(true).setToken("Hello").setStreamingLink("test"));
-            outputStream.write(gson.toJson(settings).getBytes());
+            String jsonS = "{\"token\":\"tokenNotSet\",\"activityType\":\"DEFAULT\",\"activity\":\"activityNotSet\",\"streaming\":false,\"streamingLink\":\"notSet\"}";
+            outputStream.write(jsonS.getBytes());
             outputStream.close();
         }
         return settingsFile;

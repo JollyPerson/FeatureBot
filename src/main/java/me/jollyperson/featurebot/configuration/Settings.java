@@ -1,17 +1,20 @@
 package me.jollyperson.featurebot.configuration;
 
+import net.dv8tion.jda.api.entities.Activity;
+
 public class Settings {
 
-    private String token;
-    private String activity;
-    private String activityType;
+    String token = "tokenNotSet";
+    String activity = "activityNotSet";
+    Activity.ActivityType activityType = Activity.ActivityType.DEFAULT;
+    boolean streaming = false;
+    String streamingLink = "no link provided";
+    private Settings settings;
 
-    public String getActivityType() {
+    public Activity.ActivityType getActivityType() {
         return activityType;
     }
 
-    private boolean streaming;
-    private String streamingLink;
 
     public String getToken() {
         return token;
@@ -30,6 +33,10 @@ public class Settings {
     }
 
     public Settings(SettingsManager builder){
-
+        this.token = builder.token;
+        this.activity = builder.activity;
+        this.activityType = builder.activityType;
+        this.streaming = builder.streaming;
+        this.streamingLink = builder.streamingLink;
     }
 }
