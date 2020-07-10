@@ -10,11 +10,13 @@ public class Settings {
     boolean streaming = false;
     String streamingLink = "no link provided";
     private Settings settings;
+    private String ownerID = "noOwnerID";
 
     public Activity.ActivityType getActivityType() {
         return activityType;
     }
 
+    public String getOwnerID(){return ownerID;}
 
     public String getToken() {
         return token;
@@ -38,5 +40,6 @@ public class Settings {
         this.activityType = builder.activityType;
         this.streaming = builder.streaming;
         this.streamingLink = builder.streamingLink;
+        this.ownerID = builder.ownerID;
     }
 }

@@ -23,7 +23,13 @@ public class SettingsManager {
     boolean streaming = false;
     String streamingLink = "no link provided";
     private Settings settings;
+    String ownerID;
 
+
+    public SettingsManager setOwnerID(String id){
+        this.ownerID = id;
+        return this;
+    }
 
     public SettingsManager setToken(String token) {
         this.token = token;
@@ -78,7 +84,7 @@ public class SettingsManager {
             settingsFile.createNewFile();
             System.out.println(settingsFile.getAbsoluteFile());
             FileOutputStream outputStream = new FileOutputStream(settingsFile);
-            String jsonS = "{\"token\":\"tokenNotSet\",\"activityType\":\"DEFAULT\",\"activity\":\"activityNotSet\",\"streaming\":false,\"streamingLink\":\"notSet\"}";
+            String jsonS = "{\"token\":\"tokenNotSet\",\"ownerID\":\"idNotSet\",\"activityType\":\"DEFAULT\",\"activity\":\"activityNotSet\",\"streaming\":false,\"streamingLink\":\"notSet\"}";
             outputStream.write(jsonS.getBytes());
             outputStream.close();
         }
