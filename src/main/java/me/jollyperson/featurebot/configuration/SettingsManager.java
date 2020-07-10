@@ -17,13 +17,17 @@ import java.util.stream.Stream;
 public class SettingsManager {
 
     final Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    String token = "tokenNotSet";
-    String activity = "activityNotSet";
-    Activity.ActivityType activityType = Activity.ActivityType.DEFAULT;
-    boolean streaming = false;
-    String streamingLink = "no link provided";
-    private Settings settings;
+    String token;
+    String activity;
+    Activity.ActivityType activityType;
+    boolean streaming;
+    String streamingLink;
+
     String ownerID;
+    String prefix;
+    private static String outJson = "{\r\n  \"token\": \"tokenNotSet\",\r\n  \"ownerID\": \"idNotSet\",\r\n  \"prefix\": \"?\",\r\n  \"activityType\": \"DEFAULT\",\r\n  \"activity\": \"activityNotSet\",\r\n  \"streaming\": false,\r\n  \"streamingLink\": \"notSet\",\r\n  \"mongoDB\": {\r\n    \"address\": \"localhost\",\r\n    \"port\": \"27017\",\r\n    \"username\": \"default\",\r\n    \"password\": \"password\"\r\n  }\r\n}";
+
+    private static Settings settings;
 
 
     public SettingsManager setOwnerID(String id){
@@ -52,7 +56,9 @@ public class SettingsManager {
     }
 
     public SettingsManager() {
-        loadJson();
+        if(settings == null){
+            loadJson();
+        }
     }
 
     private void loadJson() {
@@ -84,8 +90,7 @@ public class SettingsManager {
             settingsFile.createNewFile();
             System.out.println(settingsFile.getAbsoluteFile());
             FileOutputStream outputStream = new FileOutputStream(settingsFile);
-            String jsonS = "{\"token\":\"tokenNotSet\",\"ownerID\":\"idNotSet\",\"activityType\":\"DEFAULT\",\"activity\":\"activityNotSet\",\"streaming\":false,\"streamingLink\":\"notSet\"}";
-            outputStream.write(jsonS.getBytes());
+            outputStream.write(outJson.getBytes());
             outputStream.close();
         }
         return settingsFile;

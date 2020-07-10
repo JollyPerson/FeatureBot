@@ -76,7 +76,7 @@ public class Listener extends ListenerAdapter {
         }
 
         final long guildId = event.getGuild().getIdLong();
-        String prefix = cache.getPrefixes().computeIfAbsent(guildId, DatabaseManager.INSTANCE::getPrefix);
+        String prefix =  cache.getPrefixes().computeIfAbsent(guildId, DatabaseManager.INSTANCE::getPrefix);
         String raw = event.getMessage().getContentRaw();
 
         if (raw.equalsIgnoreCase(prefix + "shutdown")

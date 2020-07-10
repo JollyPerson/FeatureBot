@@ -1,5 +1,7 @@
 package me.jollyperson.featurebot.handlers;
 
+import me.jollyperson.featurebot.commands.BanCommand;
+import me.jollyperson.featurebot.commands.PingCommand;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nullable;
@@ -12,7 +14,8 @@ public class CommandManager {
     private final List<Command> commands = new ArrayList<>();
 
     public CommandManager() {
-
+        addCommand(new PingCommand());
+        addCommand(new BanCommand());
     }
 
     private void addCommand(Command cmd) {
