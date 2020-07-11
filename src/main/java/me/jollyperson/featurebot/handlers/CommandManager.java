@@ -2,6 +2,8 @@ package me.jollyperson.featurebot.handlers;
 
 import me.jollyperson.featurebot.commands.BanCommand;
 import me.jollyperson.featurebot.commands.PingCommand;
+import me.jollyperson.featurebot.commands.PrefixCommand;
+import me.jollyperson.featurebot.database.DatabaseManager;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 import javax.annotation.Nullable;
@@ -16,6 +18,7 @@ public class CommandManager {
     public CommandManager() {
         addCommand(new PingCommand());
         addCommand(new BanCommand());
+        addCommand(new PrefixCommand(DatabaseManager.INSTANCE));
     }
 
     private void addCommand(Command cmd) {

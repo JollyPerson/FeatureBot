@@ -25,7 +25,7 @@ public class SettingsManager {
 
     String ownerID;
     String prefix;
-    private static String outJson = "{\r\n  \"token\": \"tokenNotSet\",\r\n  \"ownerID\": \"idNotSet\",\r\n  \"prefix\": \"?\",\r\n  \"activityType\": \"DEFAULT\",\r\n  \"activity\": \"activityNotSet\",\r\n  \"streaming\": false,\r\n  \"streamingLink\": \"notSet\",\r\n  \"mongoDB\": {\r\n    \"address\": \"localhost\",\r\n    \"port\": \"27017\",\r\n    \"username\": \"default\",\r\n    \"password\": \"password\"\r\n  }\r\n}";
+    private static String outJson = "{\r\n  \"token\": \"tokenNotSet\",\r\n  \"ownerID\": \"idNotSet\",\r\n  \"prefix\": \"?\",\r\n  \"activityType\": \"DEFAULT\",\r\n  \"activity\": \"activityNotSet\",\r\n  \"streaming\": false,\r\n  \"streamingLink\": \"notSet\",\r\n  \"mongoDB\": {\r\n    \"address\": \"localhost\",\r\n    \"port\": \"27017\",\r\n    \"username\": \"default\",\r\n    \"password\": \"password\", \r\n \"database\": \"featurebot\",\r\n \"collection\": \"default\" }\r\n}";
 
     private static Settings settings;
 

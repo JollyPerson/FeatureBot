@@ -7,11 +7,24 @@ public class MongoDB {
     private String password;
     private String username;
 
-    public MongoDB(String address, String port, String password, String username) {
+    public String getCollection() {
+        return collection;
+    }
+
+    private String database;
+    private String collection;
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public MongoDB(String address, String port, String password, String username, String database, String collection) {
         this.address = address;
         this.port = port;
         this.password = password;
         this.username = username;
+        this.database = database;
+        this.collection = collection;
     }
 
     public String getAddress() {

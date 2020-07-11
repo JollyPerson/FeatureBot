@@ -18,7 +18,7 @@ public class Settings {
     String prefix;
     MongoDB mongoDB;
 
-    public Settings(){
+    private Settings(){
 
     }
 

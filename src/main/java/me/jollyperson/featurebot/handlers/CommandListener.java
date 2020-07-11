@@ -7,8 +7,6 @@ import me.jollyperson.featurebot.database.DatabaseManager;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.ReadyEvent;
-import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
-import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberLeaveEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -19,14 +17,14 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class Listener extends ListenerAdapter {
+public class CommandListener extends ListenerAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommandListener.class);
     private final CommandManager manager = new CommandManager();
     private Settings settings;
     private Cache cache;
 
-    public Listener(Settings settings, Cache cache){
+    public CommandListener(Settings settings, Cache cache){
         this.settings = settings;
         this.cache = cache;
 ;    }
@@ -76,7 +74,10 @@ public class Listener extends ListenerAdapter {
         }
 
         final long guildId = event.getGuild().getIdLong();
-        String prefix =  cache.getPrefixes().computeIfAbsent(guildId, DatabaseManager.INSTANCE::getPrefix);
+        String prefix = settings.getPrefix();
+        if(cache.getGuildFromCache(guildId) != null){
+            prefix = cache.getGuildFromCache(guildId).getGuildSettings().getPrefix();
+        }
         String raw = event.getMessage().getContentRaw();
 
         if (raw.equalsIgnoreCase(prefix + "shutdown")
