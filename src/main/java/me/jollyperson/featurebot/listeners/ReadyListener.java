@@ -1,5 +1,6 @@
 package me.jollyperson.featurebot.listeners;
 
+import me.jollyperson.featurebot.database.Cache;
 import me.jollyperson.featurebot.database.DatabaseManager;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.ReadyEvent;
@@ -14,8 +15,8 @@ public class ReadyListener extends ListenerAdapter {
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
         for (Guild guild : event.getJDA().getGuilds()) {
-            databaseManager.getGuild(guild.getIdLong());
-            System.out.println("firing ");
+
+            Cache.getInstance().addGuildToCache(databaseManager.getGuild(guild.getIdLong()));
         }
     }
 }

@@ -6,11 +6,11 @@ import me.jollyperson.featurebot.database.DatabaseManager;
 
 public class GuildSettings {
 
-    private long dailyEconomy = 100;
-    private boolean dailyEnabled = true;
-    private boolean logEnabled = false;
+    private long dailyEconomy;
+    private boolean dailyEnabled;
+    private boolean logEnabled;
     private long logChannelID;
-    private String prefix = new SettingsManager().build().getPrefix();
+    private String prefix;
 
     public void setDailyEconomy(long dailyEconomy) {
         this.dailyEconomy = dailyEconomy;
@@ -29,6 +29,7 @@ public class GuildSettings {
     }
 
     public String getPrefix() {
+
         return prefix;
     }
 

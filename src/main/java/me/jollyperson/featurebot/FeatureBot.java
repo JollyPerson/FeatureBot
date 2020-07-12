@@ -25,7 +25,7 @@ public class FeatureBot {
     private final Settings settings;
     private static final Logger logger = LoggerFactory.getLogger(FeatureBot.class);
     private final JDA jda;
-    private final Cache cache = new Cache();
+    private final Cache cache = Cache.getInstance();
     private final DatabaseManager databaseManager = DatabaseManager.INSTANCE;
 
     private FeatureBot() throws LoginException {

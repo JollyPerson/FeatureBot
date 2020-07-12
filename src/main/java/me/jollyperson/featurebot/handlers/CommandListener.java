@@ -27,7 +27,7 @@ public class CommandListener extends ListenerAdapter {
     public CommandListener(Settings settings, Cache cache){
         this.settings = settings;
         this.cache = cache;
-;    }
+    }
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
         LOGGER.info("{} is ready", event.getJDA().getSelfUser().getAsTag());
@@ -76,7 +76,7 @@ public class CommandListener extends ListenerAdapter {
         final long guildId = event.getGuild().getIdLong();
         String prefix = settings.getPrefix();
         if(cache.getGuildFromCache(guildId) != null){
-            prefix = cache.getGuildFromCache(guildId).getGuildSettings().getPrefix();
+            prefix = cache.getPrefix(guildId);
         }
         String raw = event.getMessage().getContentRaw();
 
@@ -89,7 +89,7 @@ public class CommandListener extends ListenerAdapter {
             return;
         }
 
-        if (raw.startsWith(prefix)) {
+        if (raw.toLowerCase().startsWith(prefix.toLowerCase())) {
             manager.handle(event, prefix);
         }
     }

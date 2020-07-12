@@ -19,10 +19,13 @@ public class PrefixCommand implements Command {
     @Override
     public void handle(CommandContext ctx) {
         if(ctx.getArgs().isEmpty()){
-
-
-            //ctx.getChannel().sendMessage(new EmbedBuilder().setFooter("Command sent by " + ctx.getAuthor().getAsTag(), ctx.getAuthor().getAvatarUrl()).setDescription(Cache.getInstance().getGuildFromCache(ctx.getGuild().getIdLong()).getGuildSettings().getPrefix() + "prefix <prefix>").setColor(Color.RED).build());
+            ctx.getChannel().sendMessage(new EmbedBuilder().setFooter("Command sent by " + ctx.getAuthor().getAsTag(), ctx.getAuthor().getAvatarUrl()).setDescription(Cache.getInstance().getGuildFromCache(ctx.getGuild().getIdLong()).getGuildSettings().getPrefix() + "prefix <prefix>").setColor(Color.RED).build()).queue();
+            return;
         }
+        String prefix = ctx.getArgs().get(0);
+        Cache.getInstance().setPrefix(ctx.getGuild().getIdLong(), prefix);
+        DatabaseManager.INSTANCE.setPrefix(ctx.getGuild().getIdLong(), prefix);
+        ctx.getChannel().sendMessage(new EmbedBuilder().setFooter("Command sent by "+ ctx.getAuthor().getAsTag(), ctx.getAuthor().getAvatarUrl()).setDescription("Prefix set to `" + prefix).build()).queue();
     }
 
     @Override
